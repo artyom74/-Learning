@@ -4,27 +4,50 @@ using namespace std;
 
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru");
-   
 
-    int AB_distance;
+    double fuel_needed = 0;
+
+    int distance_AB;
     cout << "Введите расстояние от точки A до точки B: ";
-    cin >> AB_distance;
+    cin >> distance_AB;
 
-    int BC_distance;
+    int distance_BC;
     cout << "Введите расстояние от точки B до точки C: ";
-    cin >> BC_distance;
+    cin >> distance_BC;
 
     int weight;
     cout << "Введите общее количество груза: ";
     cin >> weight;
 
-    int tank = 300;
+    if (weight <= 500) {
+        fuel_needed = distance_AB + distance_BC;
+    }
+    else if (weight <= 1000) {
+        fuel_needed = 4 * (distance_AB + distance_BC);
+    }
+    else if (weight <= 1500) {
+        fuel_needed = 7 * (distance_AB + distance_BC);
+    }
+    else if (weight <= 2000) {
+        fuel_needed = 9 * (distance_AB + distance_BC);
+    }
+    else {
+        cout << "Самолёт не поднимает больше 2000кг. Полёт по введённому маршруту - невозможен";
+    }
 
+    double fuel_capacity = 300;
 
+    if (fuel_needed <= fuel_capacity) {
+        cout << "Дозаправка на точке B - не нужна. Самолет может пролететь из точки A до точки C без неё.";
+    }
+    else {
+        double refuel_amount = fuel_needed - fuel_capacity;
+        cout << "Нужно " << refuel_amount << " литров дозаправки на точке B!";
 
+    }
 
+    return 0;
 }
-
 
 
 /*Грузовой самолет должен пролететь с грузом из пункта А
@@ -36,7 +59,8 @@ int main(int argc, char** argv) {
 ■ до 2000 кг — 9 литров / км;
 ■ более 2000 кг — самолет не поднимает.
 Пользователь вводит расстояние между пунктами А и В,
-и расстояние между пунктами В и С, а также вес груза.Программа должна рассчитать какое минимальное количество
+и расстояние между пунктами В и С, а также вес груза.
+Программа должна рассчитать какое минимальное количество
 топлива необходимо для дозаправки самолету в пункте В,
 чтобы долететь из пункта А в пункт С.В случае невозможности преодолеть любое из расстояний — программа должна
 вывести сообщение о невозможности полета по введенному
