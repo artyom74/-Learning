@@ -45,7 +45,6 @@ int main(int argc, char** argv) {
         cout << "Нужно " << refuel_amount << " литров дозаправки на точке B!";
 
     }
-
     return 0;
 }
 
